@@ -1,11 +1,13 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { Link } from 'react-router-dom'
 import Loader from '../../Loader'
 import axios from 'axios'
 import $ from 'jquery'
 import { Lightbox } from "react-modal-image";
+
 require("isotope-layout/dist/isotope.pkgd")
-export default class All extends Component {
+
+export default class All extends PureComponent {
 
     state = {
         open: false
@@ -45,6 +47,15 @@ export default class All extends Component {
         });
     }
 
+    componentDidMount = async () => {
+        await axios.get(`https://yaroslav.decor-if.com.ua/api/works/all.json?limit=99`)
+            .then(res => {
+                var data = JSON.parse(JSON.stringify(res.data))
+
+                this.setState({ works: data.works })
+            })
+    }
+
     openPopup = (e) => {
         this.setState({
             image_src: e.image_src,
@@ -57,22 +68,12 @@ export default class All extends Component {
         this.setState({ open: false })
     }
 
-    constructor(props) {
-        super(props)
-        axios.get(`https://yaroslav.decor-if.com.ua/api/works/all.json?limit=99`)
-            .then(res => {
-                var data = JSON.parse(JSON.stringify(res.data))
-
-                this.setState({ works: data.works })
-            })
-    }
-
     render() {
         return (
             <div className="WorksAll">
 
                 <Loader />
-                
+
                 <section id="hero-7" className="hero-section division">
                     <div className="container">
 

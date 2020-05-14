@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Header from './components/segments/Header'
 import Footer from './components/segments/Footer'
@@ -8,7 +8,7 @@ import View from './components/Pages/Works/View'
 import Contact from './components/Pages/Contact'
 import ScrollToTop from './ScrollToTop'
 
-export default class App extends Component {
+export default class App extends PureComponent {
 
   render() {
     return (

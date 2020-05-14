@@ -12,9 +12,8 @@ export default class Works extends Component {
         open: false
     }
 
-    constructor(props) {
-        super(props)
-        axios.get(`https://yaroslav.decor-if.com.ua/api/works/all.json?limit=6`)
+    componentDidMount = async () => {
+        await axios.get(`https://yaroslav.decor-if.com.ua/api/works/all.json?limit=6`)
             .then(res => {
                 var data = JSON.parse(JSON.stringify(res.data))
 
@@ -73,14 +72,12 @@ export default class Works extends Component {
             <section id="portfolio-2" className="wide-100 portfolio-section division">
                 <div className="container">
 
-                    {
-                        this.state.open && (
-                            <Lightbox
-                                medium={this.state.image_src}
-                                alt={this.state.title}
-                                onClose={this.closePopup}
-                            />
-                        )
+                    {this.state.open &&
+                        <Lightbox
+                            medium={this.state.image_src}
+                            alt={this.state.title}
+                            onClose={this.closePopup}
+                        />
                     }
 
                     <div className="row">
@@ -114,34 +111,32 @@ export default class Works extends Component {
                         <div className="col-md-12 portfolio-items-list ind-5">
                             {this.state.works &&
                                 <div className="masonry-wrap grid-loaded">
-                                    {
-                                        this.state.works.map((item, i) => {
-
-                                            return <div className={"portfolio-item " + item.tags } key={i} >
-                                                <div className="hover-overlay">
-                                                    <img className="img-fluid" src={item.image_src} alt="" />
-                                                    <div className="item-overlay"></div>
-                                                    <div className="image-zoom">
-                                                        <p style={{ color: "white", cursor: "pointer" }} onClick={() => this.openPopup(item)} id="w1" className="image-link">
-                                                            <i className="fas fa-search-plus"></i>
-                                                        </p>
-                                                        <div style={{ display: "none" }}>
-                                                            <div id="data-1" className="text-center"><img style={{ width: "70%", height: "70%" }} src="/images/works/1.png" alt="" /></div>
-                                                        </div>
+                                    {this.state.works.map((item, i) =>
+                                        <div className={`portfolio-item ${item.tags}`} key={i} >
+                                            <div className="hover-overlay">
+                                                <img className="img-fluid" src={item.image_src} alt="" />
+                                                <div className="item-overlay"></div>
+                                                <div className="image-zoom">
+                                                    <p style={{ color: "white", cursor: "pointer" }} onClick={() => this.openPopup(item)} id="w1" className="image-link">
+                                                        <i className="fas fa-search-plus"></i>
+                                                    </p>
+                                                    <div style={{ display: "none" }}>
+                                                        <div id="data-1" className="text-center"><img style={{ width: "70%", height: "70%" }} src="/images/works/1.png" alt="" /></div>
                                                     </div>
                                                 </div>
-                                                <div className="project-data">
-                                                    <h5 className="h5-sm">
-                                                        <Link to={"/works/" + item.id} className="red-hover">{item.title}</Link>
-                                                    </h5>
+                                            </div>
+                                            <div className="project-data">
+                                                <h5 className="h5-sm">
+                                                    <Link to={`/works/${item.id}`} className="red-hover">{item.title}</Link>
+                                                </h5>
 
-                                                    <p>{item.tags}</p>
-
-                                                </div>
+                                                <p>{item.tags}</p>
 
                                             </div>
 
-                                        })
+                                        </div>
+
+                                    )
                                     }
 
 
@@ -151,7 +146,6 @@ export default class Works extends Component {
                     </div>
 
                 </div>
-
 
                 <div className="row">
                     <div className="col-md-12 all-projects-btn">
