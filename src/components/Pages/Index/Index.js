@@ -96,6 +96,14 @@ export default class Index extends Component {
                                     </div>
 
                                     <div className="barWrapper">
+                                        <p>React JS</p>
+                                        <span className="skill-percent">60%</span>
+                                        <div className="progress">
+                                            <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+
+                                    <div className="barWrapper">
                                         <p>PHP MVC</p>
                                         <span className="skill-percent">75%</span>
                                         <div className="progress">

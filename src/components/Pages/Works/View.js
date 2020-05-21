@@ -1,31 +1,24 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import axios from 'axios'
 import Loader from '../../Loader'
 import { Lightbox } from "react-modal-image";
 
-export default class View extends Component {
+export default class View extends PureComponent {
 
     state = {
         open: false
     }
 
-    closePopUp = () => {
-        this.setState({ open: false });
+    setPopup = (value) => {
+        this.setState({ open: value });
     }
 
-    openPopUp = () => {
-        this.setState({ open: true });
-    }
-
-    constructor(props) {
-        super(props)
-        
-        axios.get(`https://yaroslav.decor-if.com.ua/api/works/specific?id=` + this.props.match.params.id)
+    componentDidMount = async () => {
+        await axios.get(`https://yaroslav.decor-if.com.ua/api/works/specific?id=` + this.props.match.params.id)
             .then(res => {
                 this.setState({ work: res.data[0] })
             })
     }
-
     render() {
         return (
             <div>
@@ -37,7 +30,7 @@ export default class View extends Component {
                         <Lightbox
                             medium={this.state.work.image_src}
                             alt={this.state.work.title}
-                            onClose={this.closePopUp}
+                            onClose={() => this.setPopup(false)}
                         />
                     )
                 }
@@ -57,8 +50,8 @@ export default class View extends Component {
 
                                         <div className="project-text">
 
-                                            <p className="" dangerouslySetInnerHTML={{__html: this.state.work.description}}>
-                                                
+                                            <p className="" dangerouslySetInnerHTML={{ __html: this.state.work.description }}>
+
                                             </p>
 
                                         </div>
@@ -72,7 +65,7 @@ export default class View extends Component {
                                             <p>Launch Website:
                                                 <span>
                                                     <a href={this.state.work.link} target="_blank" className="red-color" rel="noopener noreferrer">
-                                                        {this.state.work.link.replace('https://','')}
+                                                        {this.state.work.link.replace('https://', '')}
                                                     </a>
                                                 </span>
                                             </p>
@@ -106,7 +99,7 @@ export default class View extends Component {
                                                 <div className="item-overlay"></div>
 
                                                 <div className="image-zoom">
-                                                    <p style={{ color: "white", cursor: "pointer" }} id="single_image" onClick={this.openPopUp} className="image-link" >
+                                                    <p style={{ color: "white", cursor: "pointer" }} id="single_image" onClick={() => this.setPopup(true)} className="image-link" >
                                                         <i className="fas fa-search-plus"></i>
                                                     </p>
                                                     <div style={{ display: "none" }}>

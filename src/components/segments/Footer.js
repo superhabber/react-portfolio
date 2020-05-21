@@ -42,19 +42,6 @@ export default class Footer extends Component {
 
                                     <div className="input-group">
                                         <input type="email" className="form-control" placeholder="Email Address" required id="lay-s-email" />
-                                        {/* <script>
-                                            function checkNewsLetterLay() {
-                                                $.ajax({
-                                                    url: '/news-letter/check',
-                                                    data: {email: $('#lay-s-email').val() },
-                                                    method: 'GET',
-                                                    success: function(data){
-                                                        $('#lay-data').html(data);
-                                                        $('#lay-s-email').val('');
-                                                    }
-                                                })
-                                            }
-                                        </script> */}
                                         <span className="input-group-btn">
                                             <div style={{display:"none"}}>
                                                 <div id="lay-data">
@@ -64,11 +51,6 @@ export default class Footer extends Component {
 											<button type="submit"  href="#lay-data" id="lay-news" className="btn btn-black">
 												<i className="far fa-envelope"></i>
 											</button>
-                                            <script>
-                                                $(document).ready(function() {
-                                                    $("#lay-news").fancybox()
-                                                });
-                                            </script>
 										</span>
                                     </div>
                                     <label htmlFor="s-email" className="form-notification"></label>
