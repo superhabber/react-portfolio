@@ -13,7 +13,7 @@ export default class Works extends Component {
     }
 
     componentDidMount = async () => {
-        await axios.get(`https://yaroslav.decor-if.com.ua/api/works/all.json?limit=6`)
+        await axios.get(`https://diplom-porto-shop.000webhostapp.com/works/all.json?limit=6`)
             .then(res => {
                 var data = JSON.parse(JSON.stringify(res.data))
 

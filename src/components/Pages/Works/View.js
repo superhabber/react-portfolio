@@ -14,7 +14,7 @@ export default class View extends PureComponent {
     }
 
     componentDidMount = async () => {
-        await axios.get(`https://yaroslav.decor-if.com.ua/api/works/specific?id=` + this.props.match.params.id)
+        await axios.get(`https://diplom-porto-shop.000webhostapp.com/works/specific?id=` + this.props.match.params.id)
             .then(res => {
                 this.setState({ work: res.data[0] })
             })
